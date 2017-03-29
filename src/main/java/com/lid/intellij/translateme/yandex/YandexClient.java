@@ -10,7 +10,7 @@ import java.util.Map;
 public class YandexClient {
     private static final Logger log = Logger.getInstance(YandexClient.class);
 
-    private static final String DEFAULT_ENCODING = "UTF-8";
+    public static final String DEFAULT_ENCODING = "UTF-8";
 
     private YandexServiceInvoker yandexServiceInvoker;
 

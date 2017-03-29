@@ -7,6 +7,8 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.Scanner;
 
+import static com.lid.intellij.translateme.yandex.YandexClient.DEFAULT_ENCODING;
+
 /**
  * Simple Yandex REST service invoker
  *
@@ -15,7 +17,6 @@ import java.util.Scanner;
 class YandexServiceInvoker {
     private static final Logger log = Logger.getInstance(YandexServiceInvoker.class);
 
-    private static final String DEFAULT_ENCODING = "UTF-8";
     private static final String DEFAULT_DELIMITER_PATTERN = "\\A";
 
     private static final String EMPTY_RESPONSE = "";
