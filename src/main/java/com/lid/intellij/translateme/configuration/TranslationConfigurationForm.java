@@ -3,7 +3,7 @@ package com.lid.intellij.translateme.configuration;
 import com.google.gson.Gson;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.ui.ComboBox;
-import com.lid.intellij.translateme.yandex.LangsResponse;
+import com.lid.intellij.translateme.yandex.response.LangsResponse;
 import com.lid.intellij.translateme.yandex.YandexClient;
 import org.jetbrains.annotations.NotNull;
 
@@ -11,7 +11,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class TranslationConfigurationForm {
     private static final Logger log = Logger.getInstance(TranslationConfigurationForm.class);

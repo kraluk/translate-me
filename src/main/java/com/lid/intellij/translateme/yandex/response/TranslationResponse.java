@@ -1,4 +1,4 @@
-package com.lid.intellij.translateme.yandex;
+package com.lid.intellij.translateme.yandex.response;
 
 import java.util.List;
 

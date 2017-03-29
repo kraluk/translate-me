@@ -1,4 +1,4 @@
-package com.lid.intellij.translateme.yandex;
+package com.lid.intellij.translateme.yandex.response;
 
 
 import com.google.gson.annotations.SerializedName;
@@ -15,10 +15,18 @@ import java.util.Map;
 public class LangsResponse {
 
     @SerializedName("dirs")
-    List<String> pairs;
+    private List<String> pairs;
 
     @SerializedName("langs")
-    Map<String, String> langs;
+    private Map<String, String> langs;
+
+    public void setPairs(List<String> pairs) {
+        this.pairs = pairs;
+    }
+
+    public void setLangs(Map<String, String> langs) {
+        this.langs = langs;
+    }
 
     public List<String> getPairs() {
         return pairs;
