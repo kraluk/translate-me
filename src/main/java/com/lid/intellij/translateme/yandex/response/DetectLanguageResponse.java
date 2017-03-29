@@ -2,10 +2,16 @@ package com.lid.intellij.translateme.yandex.response;
 
 
 /**
+ * Simple POJO for {@code detect} method response
+ * <p/>
+ * Example response:
+ * <br/>
+ * <code>
  * {
  * "code": 200,
  * "lang": "en"
  * }
+ * </code>
  */
 public class DetectLanguageResponse {
 

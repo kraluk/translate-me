@@ -2,6 +2,9 @@ package com.lid.intellij.translateme.yandex.response;
 
 import java.util.List;
 
+/**
+ * Simple POJO for {@code translate} method response
+ */
 public class TranslationResponse {
 
     private int code;
