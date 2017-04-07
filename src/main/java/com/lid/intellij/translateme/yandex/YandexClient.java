@@ -1,18 +1,19 @@
 package com.lid.intellij.translateme.yandex;
 
 import com.intellij.openapi.diagnostic.Logger;
+import com.lid.intellij.translateme.rest.RestServiceInvoker;
 import com.lid.intellij.translateme.yandex.YandexPropertiesProvider.YandexProperty;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Map;
 
+import static com.lid.intellij.translateme.rest.RestServiceInvoker.DEFAULT_ENCODING;
+
 public class YandexClient {
     private static final Logger log = Logger.getInstance(YandexClient.class);
 
-    public static final String DEFAULT_ENCODING = "UTF-8";
-
-    private YandexServiceInvoker yandexServiceInvoker;
+    private RestServiceInvoker restServiceInvoker;
 
     private String host;
     private String path;
@@ -25,7 +26,9 @@ public class YandexClient {
         this.path = yandexProperties.get(YandexProperty.PATH);
         this.apiKey = yandexProperties.get(YandexProperty.API_KEY);
 
-        this.yandexServiceInvoker = new YandexServiceInvoker();
+        this.restServiceInvoker = new RestServiceInvoker();
+
+        log.debug("Created client for '{} {}'", host, path);
     }
 
     public String translate(String text, String langFrom, String langTo) {
@@ -38,7 +41,7 @@ public class YandexClient {
         request.append("&text=");
         request.append(encodeText(text));
 
-        return yandexServiceInvoker.invoke(request.toString());
+        return restServiceInvoker.get(request.toString());
     }
 
     public String detect(String text) {
@@ -47,7 +50,7 @@ public class YandexClient {
         request.append("&text=");
         request.append(encodeText(text));
 
-        return yandexServiceInvoker.invoke(request.toString());
+        return restServiceInvoker.get(request.toString());
     }
 
     public String getLanguages(String ui) {
@@ -56,7 +59,7 @@ public class YandexClient {
         request.append("&ui=");
         request.append(ui);
 
-        return yandexServiceInvoker.invoke(request.toString());
+        return restServiceInvoker.get(request.toString());
     }
 
     private String buildRequest(YandexMethod method) {

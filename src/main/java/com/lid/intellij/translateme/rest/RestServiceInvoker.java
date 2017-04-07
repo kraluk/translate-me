@@ -1,4 +1,4 @@
-package com.lid.intellij.translateme.yandex;
+package com.lid.intellij.translateme.rest;
 
 import com.intellij.openapi.diagnostic.Logger;
 
@@ -7,19 +7,18 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.Scanner;
 
-import static com.lid.intellij.translateme.yandex.YandexClient.DEFAULT_ENCODING;
-
 /**
- * Simple Yandex REST service invoker
+ * Simple REST service invoker
  *
  * @author lukasz
  */
-class YandexServiceInvoker {
-    private static final Logger log = Logger.getInstance(YandexServiceInvoker.class);
+public class RestServiceInvoker {
+    private static final Logger log = Logger.getInstance(RestServiceInvoker.class);
 
     private static final String DEFAULT_DELIMITER_PATTERN = "\\A";
-
     private static final String EMPTY_RESPONSE = "";
+
+    public static final String DEFAULT_ENCODING = "UTF-8";
 
     /**
      * Invokes gives request/URL and retrieves results
@@ -27,8 +26,8 @@ class YandexServiceInvoker {
      * @param request an GET request
      * @return retrieved result if available, otherwise {@link #EMPTY_RESPONSE}
      */
-    String invoke(String request) {
-        log.trace(String.format("Attempting to invoke request '%s'...", request));
+    public String get(String request) {
+        log.trace(String.format("Attempting to get request '%s'...", request));
 
         String result;
 

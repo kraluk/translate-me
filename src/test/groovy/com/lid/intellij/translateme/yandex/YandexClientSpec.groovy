@@ -1,5 +1,6 @@
 package com.lid.intellij.translateme.yandex
 
+import com.lid.intellij.translateme.rest.RestServiceInvoker
 import org.apache.commons.lang.StringUtils
 import spock.lang.Specification
 
@@ -12,7 +13,7 @@ class YandexClientSpec extends Specification {
 
     def "should get languages"() {
         given:
-        YandexServiceInvoker invoker = Mock()
+        RestServiceInvoker invoker = Mock()
 
         YandexClient client = new YandexClient()
         client.yandexServiceInvoker = invoker
@@ -23,12 +24,12 @@ class YandexClientSpec extends Specification {
         then:
         assert StringUtils.isNotBlank(languages)
         and:
-        1 * invoker.invoke(_) >> "ok"
+        1 * invoker.get(_) >> "ok"
     }
 
     def "should detect a language"() {
         given:
-        YandexServiceInvoker invoker = Mock()
+        RestServiceInvoker invoker = Mock()
 
         YandexClient client = new YandexClient()
         client.yandexServiceInvoker = invoker
@@ -39,12 +40,12 @@ class YandexClientSpec extends Specification {
         then:
         assert StringUtils.isNotBlank(languages)
         and:
-        1 * invoker.invoke(_) >> "en"
+        1 * invoker.get(_) >> "en"
     }
 
     def "should do a translation"() {
         given:
-        YandexServiceInvoker invoker = Mock()
+        RestServiceInvoker invoker = Mock()
 
         YandexClient client = new YandexClient()
         client.yandexServiceInvoker = invoker
@@ -55,6 +56,6 @@ class YandexClientSpec extends Specification {
         then:
         assert StringUtils.isNotBlank(languages)
         and:
-        1 * invoker.invoke(_) >> "car"
+        1 * invoker.get(_) >> "car"
     }
 }
