@@ -1,4 +1,4 @@
-package com.lid.intellij.translateme.action;
+package com.lid.intellij.translateme.action.handler;
 
 import com.intellij.openapi.editor.Editor;
 

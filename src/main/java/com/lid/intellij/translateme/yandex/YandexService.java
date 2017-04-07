@@ -41,7 +41,11 @@ public class YandexService {
                 .withText(text)
                 .build();
 
+        log.debug("Attempting to invoke request '{}'...", request);
+
         String response = restServiceInvoker.get(request);
+
+        log.debug("Got response", response);
 
         return JSON_PARSER.fromJson(response, Translation.class);
     }
@@ -57,7 +61,11 @@ public class YandexService {
                 .withText(text)
                 .build();
 
+        log.debug("Attempting to invoke request '{}'...", request);
+
         String response = restServiceInvoker.get(request);
+
+        log.debug("Got response", response);
 
         return JSON_PARSER.fromJson(response, DetectedLanguage.class);
     }
@@ -73,7 +81,11 @@ public class YandexService {
                 .withUi(ui)
                 .build();
 
+        log.debug("Attempting to invoke request '{}'...", request);
+
         String response = restServiceInvoker.get(request);
+
+        log.debug("Got response", response);
 
         return JSON_PARSER.fromJson(response, AvailableLanguages.class);
     }

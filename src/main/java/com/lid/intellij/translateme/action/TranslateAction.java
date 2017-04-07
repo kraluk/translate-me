@@ -13,6 +13,7 @@ import com.intellij.openapi.ui.popup.BalloonBuilder;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.ui.awt.RelativePoint;
 import com.lid.intellij.translateme.ResultDialog;
+import com.lid.intellij.translateme.action.handler.ActionHandler;
 import com.lid.intellij.translateme.configuration.ConfigurationState;
 
 import java.awt.*;

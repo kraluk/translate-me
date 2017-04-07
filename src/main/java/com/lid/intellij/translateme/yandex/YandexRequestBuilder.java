@@ -12,7 +12,7 @@ import static com.lid.intellij.translateme.rest.RestServiceInvoker.DEFAULT_ENCOD
 /**
  * Yandex REST service *raw* request builder
  */
-class YandexRequestBuilder {
+final class YandexRequestBuilder {
 
     private final String host;
     private final String path;

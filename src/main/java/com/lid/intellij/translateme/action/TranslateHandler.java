@@ -5,6 +5,7 @@ import com.intellij.openapi.editor.Caret;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.actionSystem.EditorWriteActionHandler;
 import com.intellij.openapi.project.Project;
+import com.lid.intellij.translateme.action.handler.ActionHandler;
 import com.lid.intellij.translateme.translator.YandexTranslator;
 import org.jetbrains.annotations.Nullable;
 
