@@ -15,16 +15,16 @@ import java.util.Scanner;
 public class RestServiceInvoker {
     private static final Logger log = Logger.getInstance(RestServiceInvoker.class);
 
+    public static final String DEFAULT_ENCODING = "UTF-8";
+
     private static final String DEFAULT_DELIMITER_PATTERN = "\\A";
     private static final String EMPTY_RESPONSE = "";
 
-    public static final String DEFAULT_ENCODING = "UTF-8";
-
     /**
-     * Invokes gives request/URL and retrieves results
+     * Invokes given {@code GET} request and retrieves results
      *
-     * @param request an GET request
-     * @return retrieved result if available, otherwise {@link #EMPTY_RESPONSE}
+     * @param request a raw {@code GET} request
+     * @return raw retrieved result if available, otherwise {@link #EMPTY_RESPONSE}
      */
     public String get(String request) {
         log.trace(String.format("Attempting to get request '%s'...", request));

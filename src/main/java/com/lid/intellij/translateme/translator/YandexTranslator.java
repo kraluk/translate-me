@@ -1,52 +1,51 @@
 package com.lid.intellij.translateme.translator;
 
-import com.google.gson.Gson;
 import com.intellij.openapi.diagnostic.Logger;
-import com.lid.intellij.translateme.yandex.response.DetectLanguageResponse;
-import com.lid.intellij.translateme.yandex.response.TranslationResponse;
-import com.lid.intellij.translateme.yandex.YandexClient;
+import com.lid.intellij.translateme.rest.RestServiceInvoker;
+import com.lid.intellij.translateme.yandex.YandexService;
+import com.lid.intellij.translateme.yandex.response.DetectedLanguage;
+import com.lid.intellij.translateme.yandex.response.Translation;
 
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * TODO: !!!
+ */
 public class YandexTranslator implements Translator {
     private static final Logger log = Logger.getInstance(YandexTranslator.class);
 
     private static final int HTTP_CODE_OK = 200;
 
-    private static final Gson GSON_PARSER = new Gson();
+    private YandexService service;
+
+    public YandexTranslator() {
+        this.service = new YandexService(new RestServiceInvoker());
+    }
 
     @Override
     public List<String> translate(String text, String[] languagePair, boolean autoDetect) {
-        return translate0(text, languagePair, autoDetect);
-    }
-
-    private List<String> translate0(String splittedText, String[] languagePairs, boolean autoDetect) {
-        String translated;
-        YandexClient yandexClient = new YandexClient();
+        Translation translation;
 
         if (autoDetect) {
-            String detect = yandexClient.detect(splittedText);
-            DetectLanguageResponse response = GSON_PARSER.fromJson(detect, DetectLanguageResponse.class);
+            DetectedLanguage response = service.detect(text);
             int code = response.getCode();
 
             if (code == HTTP_CODE_OK) {
                 String language = response.getLang();
-                translated = yandexClient.translate(splittedText, language, languagePairs[1]);
+                translation = service.translate(text, language, languagePair[1]);
             } else {
                 log.debug("Failed to detect language. Received code '{}'", code);
-                translated = yandexClient.translate(splittedText, languagePairs[0], languagePairs[1]);
+                translation = service.translate(text, languagePair[0], languagePair[1]);
             }
         } else {
-            translated = yandexClient.translate(splittedText, languagePairs[0], languagePairs[1]);
+            translation = service.translate(text, languagePair[0], languagePair[1]);
         }
 
-        if (translated != null) {
-            TranslationResponse response = new Gson().fromJson(translated, TranslationResponse.class);
-            return response.getText();
+        if (translation != null && translation.getText() != null) {
+            return translation.getText();
         }
 
         return Collections.emptyList();
     }
-
 }

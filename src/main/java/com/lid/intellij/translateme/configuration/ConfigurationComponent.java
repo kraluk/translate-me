@@ -18,7 +18,6 @@ public final class ConfigurationComponent implements ProjectComponent, Configura
     private static final Logger log = Logger.getInstance(ConfigurationComponent.class);
 
     public static final String COMPONENT_NAME = "Translate.ConfigurationComponent";
-
     public static final String CONFIGURATION_LOCATION;
 
     static {

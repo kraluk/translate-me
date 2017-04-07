@@ -6,20 +6,18 @@ import javax.swing.*;
 
 public class LanguageEntryRenderer extends ListCellRendererWrapper {
 
-
     /**
      * Creates new list renderer
      */
     public LanguageEntryRenderer() {
     }
 
-
     /**
      * Return a component that has been configured to display the
      * specified value. Contains main logic for the renderer,
      */
     /*public Component getListCellRendererComponent(JList listbox, Object value,
-	                                              int index, boolean isSelected, boolean cellHasFocus) {
+                                                  int index, boolean isSelected, boolean cellHasFocus) {
 		KeyValuePair pair = (KeyValuePair) value;
 
 		if (pair != null) {
@@ -40,5 +38,4 @@ public class LanguageEntryRenderer extends ListCellRendererWrapper {
     public void customize(JList jList, Object o, int i, boolean b, boolean b1) {
 
     }
-
 }

@@ -59,15 +59,15 @@ final class YandexPropertiesProvider {
             this.key = key;
         }
 
-        public String getKey() {
-            return key;
-        }
-
         public static YandexProperty getByKey(String key) {
             return Stream.of(YandexProperty.values())
                     .filter(e -> e.getKey().equals(key))
                     .findFirst()
                     .orElseThrow(() -> new IllegalArgumentException("Illegal key value!"));
+        }
+
+        public String getKey() {
+            return key;
         }
     }
 }

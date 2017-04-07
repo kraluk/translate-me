@@ -38,6 +38,8 @@ idea {
 
 dependencies {
 
+    runtime group: 'com.google.guava', name: 'guava', version: '19.0'
+
     // Test dependencies
     testCompile group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.4.6'
     testCompile group: 'org.hamcrest', name: 'hamcrest-core', version: '1.3'

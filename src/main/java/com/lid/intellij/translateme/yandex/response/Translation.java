@@ -1,22 +1,15 @@
 package com.lid.intellij.translateme.yandex.response;
 
+import java.util.List;
 
 /**
- * Simple POJO for {@code detect} method response
- * <p/>
- * Example response:
- * <br/>
- * <code>
- * {
- * "code": 200,
- * "lang": "en"
- * }
- * </code>
+ * Simple POJO for {@code translate} method response
  */
-public class DetectLanguageResponse {
+public class Translation {
 
     private int code;
     private String lang;
+    private List<String> text;
 
     public int getCode() {
         return code;
@@ -32,5 +25,13 @@ public class DetectLanguageResponse {
 
     public void setLang(String lang) {
         this.lang = lang;
+    }
+
+    public List<String> getText() {
+        return text;
+    }
+
+    public void setText(List<String> text) {
+        this.text = text;
     }
 }

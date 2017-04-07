@@ -1,10 +1,10 @@
 package com.lid.intellij.translateme.configuration;
 
-import com.google.gson.Gson;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.ui.ComboBox;
-import com.lid.intellij.translateme.yandex.response.LangsResponse;
-import com.lid.intellij.translateme.yandex.YandexClient;
+import com.lid.intellij.translateme.rest.RestServiceInvoker;
+import com.lid.intellij.translateme.yandex.YandexService;
+import com.lid.intellij.translateme.yandex.response.AvailableLanguages;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -14,13 +14,15 @@ import java.util.List;
 
 public class TranslationConfigurationForm {
     private static final Logger log = Logger.getInstance(TranslationConfigurationForm.class);
-
     private final Checkbox autoDetect;
+
     private JPanel rootComponent;
     private ComboBox comboBoxFrom = new ComboBox();
     private ComboBox comboBoxTo = new ComboBox();
     private JLabel label = new JLabel("Select translation:");
-    private LangsResponse mLangsResponse;
+    private AvailableLanguages mLangsResponse;
+
+    private YandexService yandexService = new YandexService(new RestServiceInvoker());
 
     public TranslationConfigurationForm() {
         rootComponent = new JPanel();
@@ -79,8 +81,7 @@ public class TranslationConfigurationForm {
     private ComboBoxModel createModel() {
         if (mLangsResponse == null) {
             try {
-                String responseText = new YandexClient().getLanguages("ru");
-                mLangsResponse = new Gson().fromJson(responseText, LangsResponse.class);
+                mLangsResponse = yandexService.getLanguages("ru");
             } catch (Exception e) {
                 log.error(e);
             }

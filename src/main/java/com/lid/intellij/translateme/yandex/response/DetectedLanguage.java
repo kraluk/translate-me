@@ -1,25 +1,26 @@
 package com.lid.intellij.translateme.yandex.response;
 
-import java.util.List;
-
 /**
- * Simple POJO for {@code translate} method response
+ * Simple POJO for {@code detect} method response
  */
-public class TranslationResponse {
+public class DetectedLanguage {
 
     private int code;
     private String lang;
-    private List<String> text;
 
     public int getCode() {
         return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
     }
 
     public String getLang() {
         return lang;
     }
 
-    public List<String> getText() {
-        return text;
+    public void setLang(String lang) {
+        this.lang = lang;
     }
 }
