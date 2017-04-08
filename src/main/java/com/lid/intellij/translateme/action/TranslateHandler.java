@@ -19,10 +19,14 @@ import java.util.List;
  * @author lukasz
  */
 class TranslateHandler extends EditorActionHandler {
+    private static final String UNDERSCORE_SPLIT_PATTERN = "_";
+    private static final String CAMEL_CASE_SPLIT_PATTERN = "(?<=[a-z])(?=[A-Z])";
+
+    private static final String WORD_CONJUNCTION = " ";
 
     private final ActionHandler handler;
 
-    public TranslateHandler(ActionHandler handler) {
+    TranslateHandler(ActionHandler handler) {
         this.handler = handler;
     }
 
@@ -33,15 +37,16 @@ class TranslateHandler extends EditorActionHandler {
         }
 
         Project project = editor.getProject();
-
         String selectedText = editor.getSelectionModel().getSelectedText();
+
         if (selectedText != null && selectedText.length() > 0) {
-            String splittedText = splitCamelCase(selectedText);
-            splittedText = splitUnderscore(splittedText);
+            String preparedText = prepareTextToTranslation(selectedText);
 
             Pair<String, String> langPair = TranslateAction.getLangPair(project);
             boolean autoDetect = TranslateAction.isAutoDetect(project);
-            List<String> translated = new YandexTranslator().translate(splittedText, langPair, autoDetect);
+
+            List<String> translated = new YandexTranslator().translate(preparedText, langPair, autoDetect);
+
             if (translated != null) {
                 handler.handleResult(editor, translated);
             } else {
@@ -50,23 +55,22 @@ class TranslateHandler extends EditorActionHandler {
         }
     }
 
-    private static String splitUnderscore(String splittedText) {
-        String[] splitted = splittedText.split("_");
-        return arrayToString(splitted);
-    }
+    private static String prepareTextToTranslation(String text) {
+        String preparedText = arrayToString(text.split(CAMEL_CASE_SPLIT_PATTERN));
+        preparedText = arrayToString(preparedText.split(UNDERSCORE_SPLIT_PATTERN));
 
-    private static String splitCamelCase(String selectedText) {
-        String[] splitted = selectedText.split("(?<=[a-z])(?=[A-Z])");
-        return arrayToString(splitted);
+        return preparedText;
     }
 
     private static String arrayToString(String[] splitted) {
         if (splitted.length == 1) {
             return splitted[0];
         }
+
         StringBuilder builder = new StringBuilder();
+
         for (String word : splitted) {
-            builder.append(word).append(" ");
+            builder.append(word).append(WORD_CONJUNCTION);
         }
         return builder.toString();
     }

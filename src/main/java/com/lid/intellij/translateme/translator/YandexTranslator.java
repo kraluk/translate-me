@@ -33,8 +33,8 @@ public class YandexTranslator implements Translator {
             int code = response.getCode();
 
             if (code == HTTP_CODE_OK) {
-                String language = response.getLang();
-                translation = service.translate(text, language, languagePair.getSecond());
+                String detectedLanguage = response.getLang();
+                translation = service.translate(text, detectedLanguage, languagePair.getSecond());
             } else {
                 log.debug("Failed to detect language. Received code '{}'", code);
                 translation = service.translate(text, languagePair.getFirst(), languagePair.getSecond());

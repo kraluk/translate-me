@@ -6,14 +6,11 @@ import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.util.xmlb.XmlSerializerUtil;
 
-import static com.lid.intellij.translateme.configuration.ConfigurationState.COMPONENT_NAME;
-
 @State(
-        name = COMPONENT_NAME,
+        name = "Translate.ConfigurationState",
         storages = {@Storage("tme-configuration-state.xml")}
 )
 public class ConfigurationState implements PersistentStateComponent<ConfigurationState> {
-    public static final String COMPONENT_NAME = "Translate.ConfigurationState";
 
     private String langFrom = "en";
     private String langTo = "pl";

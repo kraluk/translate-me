@@ -11,15 +11,16 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 
+import static com.lid.intellij.translateme.configuration.ConfigurationComponent.COMPONENT_NAME;
+
 @State(
-        name = ConfigurationComponent.COMPONENT_NAME,
+        name = COMPONENT_NAME,
         storages = {@Storage("tme-configuration.xml")}
 )
 public final class ConfigurationComponent implements ProjectComponent, Configurable {
     private static final Logger log = Logger.getInstance(ConfigurationComponent.class);
 
-    public static final String COMPONENT_NAME = "Translate.ConfigurationComponent";
-    public static final String CONFIGURATION_LOCATION = System.getProperty("user.home");
+    static final String COMPONENT_NAME = "Translate.ConfigurationComponent";
 
     private TranslationConfigurationForm form;
 

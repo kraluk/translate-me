@@ -44,7 +44,7 @@ public class ResultDialog extends JDialog implements ActionListener {
         addEscapeListener(this);
     }
 
-    public static void addEscapeListener(final JDialog dialog) {
+    private static void addEscapeListener(final JDialog dialog) {
         ActionListener escListener = e -> dialog.setVisible(false);
 
         dialog.getRootPane().registerKeyboardAction(escListener,
