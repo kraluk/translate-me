@@ -2,7 +2,6 @@ plugins {
     id 'java'
     id 'groovy'
     id 'idea'
-    id 'jacoco'
     id 'org.jetbrains.intellij' version '0.2.7'
 }
 
@@ -17,7 +16,21 @@ targetCompatibility = javaTargetVersion
 group pluginGroup
 version = pluginVersion
 
-tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
+sourceSets {
+    integration {
+        java.srcDir project.file('src/integration/java')
+        groovy.srcDir project.file('src/integration/groovy')
+
+        resources.srcDir project.file('src/integration/resources')
+        resources.srcDir project.sourceSets.test.resources
+        resources.srcDir project.sourceSets.main.resources
+
+        compileClasspath = project.sourceSets.main.output +
+                project.sourceSets.test.output +
+                project.configurations.testRuntime
+        runtimeClasspath = output + compileClasspath
+    }
+}
 
 intellij {
     version ideaVersion
@@ -50,6 +63,31 @@ dependencies {
     }
 }
 
+project.configurations {
+    integration {
+        extendsFrom project.configurations.testRuntime
+        description = 'Dependencies for integration tests'
+        transitive = true
+        visible = true
+    }
+}
+
+tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
+
 task wrapper(type: Wrapper) {
     gradleVersion = '3.4.1'
+}
+
+task integrationTest(type: Test) {
+    testClassesDir = project.sourceSets.integration.output.classesDir
+    classpath = project.sourceSets.main.output +
+            project.sourceSets.test.output +
+            project.sourceSets.integration.runtimeClasspath +
+            project.configurations.testRuntime +
+            project.configurations.integrationRuntime
+
+    testLogging {
+        events 'passed', 'skipped', 'failed'
+        exceptionFormat = 'full'
+    }
 }

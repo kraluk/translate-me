@@ -1,0 +1,22 @@
+language: java
+sudo: false
+
+addons:
+  apt:
+    packages:
+      - oracle-java8-installer
+
+jdk:
+  - oraclejdk8
+
+branches:
+  only:
+    - master
+
+before_install:
+  - chmod +x gradlew
+  - ./gradlew wrapper
+
+script:
+  - ./gradlew clean
+  - ./gradlew build --info --stacktrace
