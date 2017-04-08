@@ -10,17 +10,17 @@ import static com.lid.intellij.translateme.configuration.ConfigurationState.COMP
 
 @State(
         name = COMPONENT_NAME,
-        storages = {@Storage(id = "translate", file = "$PROJECT_FILE$")}
+        storages = {@Storage("tme-configuration-state.xml")}
 )
 public class ConfigurationState implements PersistentStateComponent<ConfigurationState> {
     public static final String COMPONENT_NAME = "Translate.ConfigurationState";
 
     private String langFrom = "en";
     private String langTo = "pl";
+
     private boolean autoDetect = false;
 
-    public static ConfigurationState getInstance() {
-        return ServiceManager.getService(ConfigurationState.class);
+    private ConfigurationState() {
     }
 
     public String getFrom() {
@@ -52,5 +52,9 @@ public class ConfigurationState implements PersistentStateComponent<Configuratio
     @Override
     public void loadState(ConfigurationState state) {
         XmlSerializerUtil.copyBean(state, this);
+    }
+
+    public static ConfigurationState getInstance() {
+        return ServiceManager.getService(ConfigurationState.class);
     }
 }

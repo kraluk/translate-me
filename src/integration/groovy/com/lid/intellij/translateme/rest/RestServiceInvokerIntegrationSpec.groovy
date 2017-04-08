@@ -10,7 +10,7 @@ import spock.lang.Specification
  */
 class RestServiceInvokerIntegrationSpec extends Specification {
 
-    def invoker
+    RestServiceInvoker invoker
 
     def setup() {
         invoker = new RestServiceInvoker()
@@ -21,7 +21,7 @@ class RestServiceInvokerIntegrationSpec extends Specification {
         def request = "https://translate.yandex.net/api/v1.5/tr.json/getLangs?key=trnsl.1.1.20150828T222514Z.96c635fa0967005b.781eebb21e0a7b0e9b3b4f2fb62a21a74400189f&ui=en"
 
         when:
-        def result = invoker.get(request) as String
+        def result = invoker.get(request)
 
         then:
         assert StringUtils.isNotBlank(result)
@@ -32,7 +32,7 @@ class RestServiceInvokerIntegrationSpec extends Specification {
         def request = "https://dummy.service/"
 
         when:
-        def result = invoker.get(request) as String
+        def result = invoker.get(request)
 
         then:
         assert StringUtils.isEmpty(result)

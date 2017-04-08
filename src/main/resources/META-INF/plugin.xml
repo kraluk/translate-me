@@ -1,8 +1,9 @@
 <idea-plugin>
     <id>com.lid.intellij.translateme</id>
-    <name>TranslateMe</name>
+    <name>TranslateMe2</name>
     <version>2.0.0</version>
-    <vendor email="vladimir.vs.ivanov@gmail.com" url="https://github.com/vlivanov">vlivanov's GitHub</vendor>
+
+    <vendor email="kraluk[at]gmail[dot]com" url="https://github.com/kraluk">kraluk's GitHub</vendor>
 
     <description><![CDATA[
       This plugin eases working with the code and comments written not in English.<br>
@@ -14,32 +15,22 @@
     ]]></description>
 
     <change-notes><![CDATA[
-            1.0.0.4 Restore settings<br>
-            1.0.0.3 Support in-place translation.<br>
-            1.0.0.2 Support language auto-detection.<br>
+            2.0.0 Refactored version of vlivanov's (github.com/vlivanov/translate-me) plugin<br/>
     ]]>
     </change-notes>
 
-    <!-- please see https://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
-    <idea-version since-build="131"/>
+    <idea-version since-build="171"/>
 
-    <!-- please see https://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
-         on how to target different products -->
-    <!-- uncomment to enable plugin in all products
-    -->
     <depends>com.intellij.modules.lang</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <!-- Add your extensions here -->
-        <applicationConfigurable instance="com.lid.intellij.translateme.configuration.ConfigurationComponent">
 
-        </applicationConfigurable>
+        <applicationConfigurable instance="com.lid.intellij.translateme.configuration.ConfigurationComponent"/>
+
         <applicationService serviceImplementation="com.lid.intellij.translateme.configuration.ConfigurationState"/>
     </extensions>
 
-    <application-components>
-        <!-- Add your application components here -->
-    </application-components>
+    <application-components/>
 
     <project-components>
         <component>
@@ -51,7 +42,7 @@
     </project-components>
 
     <actions>
-        <!-- Add yactionions here -->
+
         <action id="com.lid.intellij.translateme.action.TranslateAction"
                 class="com.lid.intellij.translateme.action.TranslateAction"
                 text="Translate action"
@@ -59,6 +50,7 @@
             <add-to-group group-id="EditMenu" anchor="last"/>
             <keyboard-shortcut keymap="$default" first-keystroke="alt Y"/>
         </action>
+
         <action id="com.lid.intellij.translateme.action.TranslateAndReplaceAction"
                 class="com.lid.intellij.translateme.action.TranslateAndReplaceAction"
                 text="Translate and Replace action"
@@ -66,6 +58,7 @@
             <add-to-group group-id="EditMenu" anchor="last"/>
             <keyboard-shortcut keymap="$default" first-keystroke="alt G"/>
         </action>
+
     </actions>
 
 </idea-plugin>

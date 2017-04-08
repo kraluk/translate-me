@@ -6,23 +6,20 @@ import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
+import com.lid.intellij.translateme.gui.TranslationConfigurationForm;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 
 @State(
         name = ConfigurationComponent.COMPONENT_NAME,
-        storages = {@Storage(id = "translate", file = "$PROJECT_FILE$")}
+        storages = {@Storage("tme-configuration.xml")}
 )
 public final class ConfigurationComponent implements ProjectComponent, Configurable {
     private static final Logger log = Logger.getInstance(ConfigurationComponent.class);
 
     public static final String COMPONENT_NAME = "Translate.ConfigurationComponent";
-    public static final String CONFIGURATION_LOCATION;
-
-    static {
-        CONFIGURATION_LOCATION = System.getProperty("user.home");
-    }
+    public static final String CONFIGURATION_LOCATION = System.getProperty("user.home");
 
     private TranslationConfigurationForm form;
 
@@ -103,5 +100,4 @@ public final class ConfigurationComponent implements ProjectComponent, Configura
     public void disposeUIResources() {
         form = null;
     }
-
 }

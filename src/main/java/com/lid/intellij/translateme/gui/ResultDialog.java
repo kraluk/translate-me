@@ -1,4 +1,4 @@
-package com.lid.intellij.translateme;
+package com.lid.intellij.translateme.gui;
 
 import com.intellij.ide.BrowserUtil;
 import com.intellij.ui.components.labels.LinkLabel;
@@ -10,18 +10,22 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.util.List;
 
 public class ResultDialog extends JDialog implements ActionListener {
+    private static final String TEXT_PATTERN = "%s. %s";
 
-    public ResultDialog(String message, java.util.List<String> detail) {
+    public ResultDialog(String message, List<String> detail) {
         super(JOptionPane.getRootFrame(), message, true);
 
         final JPanel content = new JPanel();
 
         Box verticalBox = Box.createVerticalBox();
 
-        for (int i = 0; i < detail.size(); i++) {
-            verticalBox.add(new JLabel(i + 1 + ". " + detail.get(0)));
+        long lineNumber = 1;
+
+        for (String text : detail) {
+            verticalBox.add(new JLabel(String.format(TEXT_PATTERN, lineNumber++, text)));
             verticalBox.add(Box.createVerticalGlue());
         }
 
@@ -46,14 +50,13 @@ public class ResultDialog extends JDialog implements ActionListener {
         dialog.getRootPane().registerKeyboardAction(escListener,
                 KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0),
                 JComponent.WHEN_IN_FOCUSED_WINDOW);
-
     }
 
     @NotNull
     private LinkLabel createLinkLabel() {
 
-        final LinkLabel<?> showMoreLink = new LinkLabel<>("Powered by Yandex.Translator", null);
-        LinkListener showMoreListener = (aSource, aLinkData) -> BrowserUtil.browse("http://translate.yandex.com/");
+        final LinkLabel<String> showMoreLink = new LinkLabel<>("Powered by Yandex.Translator", null);
+        LinkListener<String> showMoreListener = (aSource, aLinkData) -> BrowserUtil.browse("http://translate.yandex.com/");
         showMoreLink.setListener(showMoreListener, null);
         return showMoreLink;
     }

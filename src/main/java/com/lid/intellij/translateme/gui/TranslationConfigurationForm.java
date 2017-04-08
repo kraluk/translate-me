@@ -1,7 +1,8 @@
-package com.lid.intellij.translateme.configuration;
+package com.lid.intellij.translateme.gui;
 
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.ui.ComboBox;
+import com.lid.intellij.translateme.configuration.ConfigurationState;
 import com.lid.intellij.translateme.rest.RestServiceInvoker;
 import com.lid.intellij.translateme.yandex.YandexService;
 import com.lid.intellij.translateme.yandex.response.AvailableLanguages;
@@ -14,6 +15,7 @@ import java.util.List;
 
 public class TranslationConfigurationForm {
     private static final Logger log = Logger.getInstance(TranslationConfigurationForm.class);
+
     private final Checkbox autoDetect;
 
     private JPanel rootComponent;

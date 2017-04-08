@@ -1,6 +1,7 @@
 package com.lid.intellij.translateme.translator;
 
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.util.Pair;
 import com.lid.intellij.translateme.rest.RestServiceInvoker;
 import com.lid.intellij.translateme.yandex.YandexService;
 import com.lid.intellij.translateme.yandex.response.DetectedLanguage;
@@ -24,7 +25,7 @@ public class YandexTranslator implements Translator {
     }
 
     @Override
-    public List<String> translate(String text, String[] languagePair, boolean autoDetect) {
+    public List<String> translate(String text, Pair<String, String> languagePair, boolean autoDetect) {
         Translation translation;
 
         if (autoDetect) {
@@ -33,13 +34,13 @@ public class YandexTranslator implements Translator {
 
             if (code == HTTP_CODE_OK) {
                 String language = response.getLang();
-                translation = service.translate(text, language, languagePair[1]);
+                translation = service.translate(text, language, languagePair.getSecond());
             } else {
                 log.debug("Failed to detect language. Received code '{}'", code);
-                translation = service.translate(text, languagePair[0], languagePair[1]);
+                translation = service.translate(text, languagePair.getFirst(), languagePair.getSecond());
             }
         } else {
-            translation = service.translate(text, languagePair[0], languagePair[1]);
+            translation = service.translate(text, languagePair.getFirst(), languagePair.getSecond());
         }
 
         if (translation != null && translation.getText() != null) {
