@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'groovy'
+    id 'jacoco'
     id 'idea'
     id 'org.jetbrains.intellij' version '0.2.7'
 }
@@ -49,6 +50,13 @@ idea {
     }
 }
 
+jacocoTestReport {
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+}
+
 dependencies {
 
     runtime group: 'com.google.guava', name: 'guava', version: '19.0'
@@ -60,6 +68,13 @@ dependencies {
 
     testCompile("org.spockframework:spock-core:1.1-groovy-2.4-rc-4") {
         exclude module: "groovy-all"
+    }
+}
+
+test {
+    testLogging {
+        events 'passed', 'skipped', 'failed'
+        exceptionFormat = 'full'
     }
 }
 

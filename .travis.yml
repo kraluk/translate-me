@@ -20,3 +20,7 @@ before_install:
 script:
   - ./gradlew clean
   - ./gradlew build --info --stacktrace
+  - ./gradlew jacocoTestReport
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
