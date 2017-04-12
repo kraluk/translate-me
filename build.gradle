@@ -59,7 +59,7 @@ jacocoTestReport {
 
 dependencies {
 
-    runtime group: 'com.google.guava', name: 'guava', version: '19.0'
+    compileOnly group: 'com.google.guava', name: 'guava', version: '19.0'
 
     // Test dependencies
     testCompile group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.4.6'
@@ -90,7 +90,7 @@ project.configurations {
 tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '3.4.1'
+    gradleVersion = '3.5'
 }
 
 task integrationTest(type: Test) {
