@@ -15,21 +15,21 @@ class YandexPropertySpec extends Specification {
 
     def "should get #expected from #key"() {
         when:
-        def result = YandexProperty.getByKey(key)
+            def result = YandexProperty.getByKey(key)
 
         then:
-        result == expected
+            result == expected
 
         where:
-        key << YandexProperty.values().toList().collect { e -> e.key }
-        expected << YandexProperty.values()
+            key << YandexProperty.values().toList().collect { e -> e.key }
+            expected << YandexProperty.values()
     }
 
     def "should thrown an exception when illegal key is used"() {
         when:
-        YandexProperty.getByKey("dummy")
+            YandexProperty.getByKey("dummy")
 
         then:
-        thrown(IllegalArgumentException)
+            thrown(IllegalArgumentException)
     }
 }

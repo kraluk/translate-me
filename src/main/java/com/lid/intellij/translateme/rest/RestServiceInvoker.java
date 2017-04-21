@@ -37,7 +37,9 @@ public class RestServiceInvoker {
 
             InputStream response = connection.getInputStream();
 
-            Scanner scanner = new Scanner(response, DEFAULT_ENCODING).useDelimiter(DEFAULT_DELIMITER_PATTERN);
+            Scanner
+                scanner =
+                new Scanner(response, DEFAULT_ENCODING).useDelimiter(DEFAULT_DELIMITER_PATTERN);
             result = scanner.hasNext() ? scanner.next() : EMPTY_RESPONSE;
         } catch (Exception e) {
             log.warn(e);

@@ -8,6 +8,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Pair;
 import com.lid.intellij.translateme.action.handler.ActionHandler;
 import com.lid.intellij.translateme.translator.YandexTranslator;
+
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -31,7 +32,8 @@ class TranslateHandler extends EditorActionHandler {
     }
 
     @Override
-    protected final void doExecute(final Editor editor, @Nullable final Caret caret, final DataContext dataContext) {
+    protected final void doExecute(final Editor editor, @Nullable final Caret caret,
+                                   final DataContext dataContext) {
         if (editor == null) {
             return;
         }
@@ -45,7 +47,9 @@ class TranslateHandler extends EditorActionHandler {
             Pair<String, String> langPair = TranslateAction.getLangPair(project);
             boolean autoDetect = TranslateAction.isAutoDetect(project);
 
-            List<String> translated = new YandexTranslator().translate(preparedText, langPair, autoDetect);
+            List<String>
+                translated =
+                new YandexTranslator().translate(preparedText, langPair, autoDetect);
 
             if (translated != null) {
                 handler.handleResult(editor, translated);

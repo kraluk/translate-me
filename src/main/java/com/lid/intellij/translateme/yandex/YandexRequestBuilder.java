@@ -1,13 +1,13 @@
 package com.lid.intellij.translateme.yandex;
 
-import com.google.common.base.Preconditions;
+import com.lid.intellij.translateme.rest.RestServiceInvoker;
 import com.lid.intellij.translateme.yandex.YandexPropertiesProvider.YandexProperty;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Map;
 
-import static com.lid.intellij.translateme.rest.RestServiceInvoker.DEFAULT_ENCODING;
+import static com.google.common.base.Preconditions.checkArgument;
 
 /**
  * Yandex REST service *raw* request builder
@@ -23,7 +23,6 @@ final class YandexRequestBuilder {
     private String text;
     private String langFrom;
     private String langTo;
-
     private String ui;
 
     private YandexRequestBuilder(YandexMethod method) {
@@ -37,49 +36,49 @@ final class YandexRequestBuilder {
     }
 
     public static YandexRequestBuilder forMethod(YandexMethod method) {
-        Preconditions.checkArgument(method != null, "Method cannot be null!");
+        checkArgument(method != null, "Method cannot be null!");
 
         return new YandexRequestBuilder(method);
     }
 
     private static String encodeText(String text) {
         try {
-            return URLEncoder.encode(text, DEFAULT_ENCODING);
+            return URLEncoder.encode(text, RestServiceInvoker.DEFAULT_ENCODING);
         } catch (UnsupportedEncodingException e) {
             throw new IllegalStateException("Unable to encode given text!", e);
         }
     }
 
     public YandexRequestBuilder withText(String text) {
-        Preconditions.checkArgument(text != null, "Text cannot be null!");
+        checkArgument(text != null, "Text cannot be null!");
 
         this.text = text;
         return this;
     }
 
     public YandexRequestBuilder withLangFrom(String langFrom) {
-        Preconditions.checkArgument(langFrom != null, "LangFrom cannot be null!");
+        checkArgument(langFrom != null, "LangFrom cannot be null!");
 
         this.langFrom = langFrom;
         return this;
     }
 
     public YandexRequestBuilder withLangTo(String langTo) {
-        Preconditions.checkArgument(langTo != null, "LangTo cannot be null!");
+        checkArgument(langTo != null, "LangTo cannot be null!");
 
         this.langTo = langTo;
         return this;
     }
 
     public YandexRequestBuilder withUi(String ui) {
-        Preconditions.checkArgument(ui != null, "Ui cannot be null!");
+        checkArgument(ui != null, "Ui cannot be null!");
 
         this.ui = ui;
         return this;
     }
 
     public String build() {
-        StringBuilder baseRequest = new StringBuilder(getBaseRequest(method));
+        StringBuilder baseRequest = getBaseRequest(method);
 
         switch (method) {
             case DETECT:
@@ -97,41 +96,41 @@ final class YandexRequestBuilder {
     }
 
     private String translate(StringBuilder request) {
-        request.append("&lang=");
-        request.append(langFrom);
-        request.append("-");
-        request.append(langTo);
-        request.append("&text=");
-        request.append(encodeText(text));
+        request.append("&lang=")
+            .append(langFrom)
+            .append("-")
+            .append(langTo)
+            .append("&text=")
+            .append(encodeText(text));
 
         return request.toString();
     }
 
     private String detect(StringBuilder request) {
-        request.append("&text=");
-        request.append(encodeText(text));
+        request.append("&text=")
+            .append(encodeText(text));
 
         return request.toString();
     }
 
     private String getLanguages(StringBuilder request) {
-        request.append("&ui=");
-        request.append(ui);
+        request.append("&ui=")
+            .append(ui);
 
         return request.toString();
     }
 
-    private String getBaseRequest(YandexMethod method) {
+    private StringBuilder getBaseRequest(YandexMethod method) {
         StringBuilder request = new StringBuilder();
 
         request.append("https://")
-                .append(host)
-                .append(path)
-                .append(method.getName())
-                .append("?key=")
-                .append(apiKey);
+            .append(host)
+            .append(path)
+            .append(method.getName())
+            .append("?key=")
+            .append(apiKey);
 
-        return request.toString();
+        return request;
     }
 
     /**

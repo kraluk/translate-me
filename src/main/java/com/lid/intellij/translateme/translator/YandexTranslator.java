@@ -25,7 +25,8 @@ public class YandexTranslator implements Translator {
     }
 
     @Override
-    public List<String> translate(String text, Pair<String, String> languagePair, boolean autoDetect) {
+    public List<String> translate(String text, Pair<String, String> languagePair,
+                                  boolean autoDetect) {
         Translation translation;
 
         if (autoDetect) {
@@ -37,10 +38,12 @@ public class YandexTranslator implements Translator {
                 translation = service.translate(text, detectedLanguage, languagePair.getSecond());
             } else {
                 log.debug("Failed to detect language. Received code '{}'", code);
-                translation = service.translate(text, languagePair.getFirst(), languagePair.getSecond());
+                translation =
+                    service.translate(text, languagePair.getFirst(), languagePair.getSecond());
             }
         } else {
-            translation = service.translate(text, languagePair.getFirst(), languagePair.getSecond());
+            translation =
+                service.translate(text, languagePair.getFirst(), languagePair.getSecond());
         }
 
         if (translation != null && translation.getText() != null) {

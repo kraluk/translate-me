@@ -11,10 +11,10 @@ class YandexPropertiesProviderSpec extends Specification {
 
     def "should get all required properties"() {
         when:
-        def properties = YandexPropertiesProvider.getProperties()
+            def properties = YandexPropertiesProvider.getProperties()
 
         then:
-        assert properties != null
-        assert properties.size() == YandexPropertiesProvider.YandexProperty.values().length
+            assert properties != null
+            assert properties.size() == YandexPropertiesProvider.YandexProperty.values().length
     }
 }

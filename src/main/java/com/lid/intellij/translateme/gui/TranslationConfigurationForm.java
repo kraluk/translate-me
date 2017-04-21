@@ -6,12 +6,14 @@ import com.lid.intellij.translateme.configuration.ConfigurationState;
 import com.lid.intellij.translateme.rest.RestServiceInvoker;
 import com.lid.intellij.translateme.yandex.YandexService;
 import com.lid.intellij.translateme.yandex.response.AvailableLanguages;
+
 import org.jetbrains.annotations.NotNull;
 
-import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.*;
 
 public class TranslationConfigurationForm {
     private static final Logger log = Logger.getInstance(TranslationConfigurationForm.class);
@@ -105,7 +107,6 @@ public class TranslationConfigurationForm {
     public void save(ConfigurationState data) {
         String selectedItemFrom = (String) comboBoxFrom.getSelectedItem();
         String selectedItemTo = (String) comboBoxTo.getSelectedItem();
-
 
         if (selectedItemFrom != null && selectedItemTo != null) {
             data.setLangPair(selectedItemFrom, selectedItemTo);

@@ -62,7 +62,8 @@ public class TranslateAction extends EditorAction {
 
         private void showErrorMessage(Editor editor, String message) {
             BalloonBuilder builder =
-                    JBPopupFactory.getInstance().createHtmlTextBalloonBuilder("hello", MessageType.ERROR, null);
+                JBPopupFactory.getInstance()
+                    .createHtmlTextBalloonBuilder("hello", MessageType.ERROR, null);
             Balloon balloon = builder.createBalloon();
             balloon.setTitle(message);
             CaretModel caretModel = editor.getCaretModel();

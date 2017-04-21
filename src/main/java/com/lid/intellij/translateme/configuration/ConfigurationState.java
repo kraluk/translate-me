@@ -7,8 +7,8 @@ import com.intellij.openapi.components.Storage;
 import com.intellij.util.xmlb.XmlSerializerUtil;
 
 @State(
-        name = "Translate.ConfigurationState",
-        storages = {@Storage("tme-configuration-state.xml")}
+    name = "Translate.ConfigurationState",
+    storages = {@Storage("tme-configuration-state.xml")}
 )
 public class ConfigurationState implements PersistentStateComponent<ConfigurationState> {
 

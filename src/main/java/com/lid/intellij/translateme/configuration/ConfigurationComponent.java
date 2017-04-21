@@ -7,6 +7,7 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
 import com.lid.intellij.translateme.gui.TranslationConfigurationForm;
+
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -14,8 +15,8 @@ import javax.swing.*;
 import static com.lid.intellij.translateme.configuration.ConfigurationComponent.COMPONENT_NAME;
 
 @State(
-        name = COMPONENT_NAME,
-        storages = {@Storage("tme-configuration.xml")}
+    name = COMPONENT_NAME,
+    storages = {@Storage("tme-configuration.xml")}
 )
 public final class ConfigurationComponent implements ProjectComponent, Configurable {
     private static final Logger log = Logger.getInstance(ConfigurationComponent.class);
@@ -74,8 +75,6 @@ public final class ConfigurationComponent implements ProjectComponent, Configura
 
     /**
      * Stores settings from form to configuration bean.
-     *
-     * @throws ConfigurationException
      */
     @Override
     public void apply() throws ConfigurationException {

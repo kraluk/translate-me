@@ -17,29 +17,39 @@ final class YandexPropertiesProvider {
     private static final Logger log = Logger.getInstance(YandexPropertiesProvider.class);
 
     private static final String FILE_NAME = "yandex.properties";
+    private static final Map<YandexProperty, String> PROPERTIES_MAP;
 
-    private static Map<YandexProperty, String> propertiesMap;
+    static {
+        PROPERTIES_MAP = loadProperties();
+    }
+
+    private YandexPropertiesProvider() {
+        throw new UnsupportedOperationException(
+            "This is a utility class and cannot be instantiated");
+    }
 
     public static Map<YandexProperty, String> getProperties() {
+        return PROPERTIES_MAP;
+    }
 
-        if (propertiesMap == null) {
-            Properties properties = new Properties();
-            propertiesMap = Maps.newHashMap();
+    private static Map<YandexProperty, String> loadProperties() {
+        Properties properties = new Properties();
+        Map<YandexProperty, String> propertiesMap = Maps.newHashMap();
 
-            try (final InputStream stream = YandexPropertiesProvider.class.getClassLoader().getResourceAsStream(FILE_NAME)) {
-                properties.load(stream);
+        try (final InputStream stream = YandexPropertiesProvider.class.getClassLoader()
+            .getResourceAsStream(FILE_NAME)) {
+            properties.load(stream);
 
-                log.debug("Loaded '{}' properties.", properties.size());
+            log.debug("Loaded '{}' properties.", properties.size());
 
-                for (String name : properties.stringPropertyNames()) {
-                    YandexProperty key = YandexProperty.getByKey(name);
-                    String value = properties.getProperty(name);
+            for (String name : properties.stringPropertyNames()) {
+                YandexProperty key = YandexProperty.getByKey(name);
+                String value = properties.getProperty(name);
 
-                    propertiesMap.put(key, value);
-                }
-            } catch (Exception e) {
-                log.error("Unable to load '{}' file!", e, FILE_NAME);
+                propertiesMap.put(key, value);
             }
+        } catch (Exception e) {
+            log.error("Unable to load '{}' file!", e, FILE_NAME);
         }
 
         return propertiesMap;
@@ -61,9 +71,9 @@ final class YandexPropertiesProvider {
 
         public static YandexProperty getByKey(String key) {
             return Stream.of(YandexProperty.values())
-                    .filter(e -> e.getKey().equals(key))
-                    .findFirst()
-                    .orElseThrow(() -> new IllegalArgumentException("Illegal key value!"));
+                .filter(e -> e.getKey().equals(key))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Illegal key value!"));
         }
 
         public String getKey() {

@@ -7,7 +7,9 @@ import com.lid.intellij.translateme.yandex.response.AvailableLanguages;
 import com.lid.intellij.translateme.yandex.response.DetectedLanguage;
 import com.lid.intellij.translateme.yandex.response.Translation;
 
-import static com.lid.intellij.translateme.yandex.YandexRequestBuilder.YandexMethod.*;
+import static com.lid.intellij.translateme.yandex.YandexRequestBuilder.YandexMethod.DETECT;
+import static com.lid.intellij.translateme.yandex.YandexRequestBuilder.YandexMethod.GET_LANGUAGES;
+import static com.lid.intellij.translateme.yandex.YandexRequestBuilder.YandexMethod.TRANSLATE;
 
 /**
  * Yandex translation service
@@ -36,10 +38,10 @@ public class YandexService {
      */
     public Translation translate(String text, String langFrom, String langTo) {
         String request = YandexRequestBuilder.forMethod(TRANSLATE)
-                .withLangFrom(langFrom)
-                .withLangTo(langTo)
-                .withText(text)
-                .build();
+            .withLangFrom(langFrom)
+            .withLangTo(langTo)
+            .withText(text)
+            .build();
 
         log.debug("Attempting to invoke request '{}'...", request);
 
@@ -58,8 +60,8 @@ public class YandexService {
      */
     public DetectedLanguage detect(String text) {
         String request = YandexRequestBuilder.forMethod(DETECT)
-                .withText(text)
-                .build();
+            .withText(text)
+            .build();
 
         log.debug("Attempting to invoke request '{}'...", request);
 
@@ -78,8 +80,8 @@ public class YandexService {
      */
     public AvailableLanguages getLanguages(String ui) {
         String request = YandexRequestBuilder.forMethod(GET_LANGUAGES)
-                .withUi(ui)
-                .build();
+            .withUi(ui)
+            .build();
 
         log.debug("Attempting to invoke request '{}'...", request);
 
