@@ -40,9 +40,10 @@ public class RestServiceInvoker {
             Scanner
                 scanner =
                 new Scanner(response, DEFAULT_ENCODING).useDelimiter(DEFAULT_DELIMITER_PATTERN);
+
             result = scanner.hasNext() ? scanner.next() : EMPTY_RESPONSE;
         } catch (Exception e) {
-            log.warn(e);
+            log.error("Unable to invoke request '{}'", e, request);
             result = EMPTY_RESPONSE;
         }
 

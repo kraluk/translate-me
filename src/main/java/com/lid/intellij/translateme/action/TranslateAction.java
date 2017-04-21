@@ -1,5 +1,7 @@
 package com.lid.intellij.translateme.action;
 
+import com.intellij.openapi.application.Application;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.actionSystem.EditorAction;
@@ -51,13 +53,17 @@ public class TranslateAction extends EditorAction {
 
         @Override
         public void handleResult(Editor editor, List<String> translated) {
-            ResultDialog resultDialog = new ResultDialog("Translated", translated);
-            resultDialog.setVisible(true);
+            Application application = ApplicationManager.getApplication();
+            application.invokeLater(() -> {
+                ResultDialog resultDialog = new ResultDialog("Translated", translated);
+                resultDialog.setVisible(true);
+            });
         }
 
         @Override
         public void handleError(Editor editor) {
-            showErrorMessage(editor, "Failed to translate");
+            Application app = ApplicationManager.getApplication();
+            app.invokeLater(() -> showErrorMessage(editor, "Failed to translate"));
         }
 
         private void showErrorMessage(Editor editor, String message) {
