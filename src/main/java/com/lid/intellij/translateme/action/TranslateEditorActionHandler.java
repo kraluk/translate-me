@@ -19,7 +19,7 @@ import java.util.List;
  * @author v.ivanov
  * @author lukasz
  */
-class TranslateHandler extends EditorActionHandler {
+class TranslateEditorActionHandler extends EditorActionHandler {
     private static final String UNDERSCORE_SPLIT_PATTERN = "_";
     private static final String CAMEL_CASE_SPLIT_PATTERN = "(?<=[a-z])(?=[A-Z])";
 
@@ -27,7 +27,7 @@ class TranslateHandler extends EditorActionHandler {
 
     private final ActionHandler handler;
 
-    TranslateHandler(ActionHandler handler) {
+    TranslateEditorActionHandler(ActionHandler handler) {
         this.handler = handler;
     }
 

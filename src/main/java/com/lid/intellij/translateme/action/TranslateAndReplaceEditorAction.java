@@ -11,7 +11,7 @@ import java.util.List;
 public class TranslateAndReplaceEditorAction extends EditorAction {
 
     protected TranslateAndReplaceEditorAction() {
-        super(new TranslateHandler(new ActionHandler() {
+        super(new TranslateEditorActionHandler(new ActionHandler() {
             @Override
             public void handleResult(Editor editor, List<String> translated) {
                 final SelectionModel selectionModel = editor.getSelectionModel();
