@@ -8,9 +8,9 @@ import com.lid.intellij.translateme.action.handler.ActionHandler;
 
 import java.util.List;
 
-public class TranslateAndReplaceAction extends EditorAction {
+public class TranslateAndReplaceEditorAction extends EditorAction {
 
-    protected TranslateAndReplaceAction() {
+    protected TranslateAndReplaceEditorAction() {
         super(new TranslateHandler(new ActionHandler() {
             @Override
             public void handleResult(Editor editor, List<String> translated) {

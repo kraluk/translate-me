@@ -24,12 +24,12 @@ public final class ConfigurationComponent implements ProjectComponent, Configura
 
     @Override
     public void projectOpened() {
-        log.info("ConfigurationComponent.projectOpened");
+        log.debug("Project opened.");
     }
 
     @Override
     public void projectClosed() {
-        log.info("ConfigurationComponent.projectClosed");
+        log.debug("Project closed.");
     }
 
     @Override
@@ -62,7 +62,7 @@ public final class ConfigurationComponent implements ProjectComponent, Configura
             form = new TranslationConfigurationForm();
         }
 
-        return form.getRootComponent();
+        return form.getRootPanel();
     }
 
     /**

@@ -44,8 +44,8 @@ class TranslateHandler extends EditorActionHandler {
         if (selectedText != null && selectedText.length() > 0) {
             String preparedText = prepareTextToTranslation(selectedText);
 
-            Pair<String, String> langPair = TranslateAction.getLangPair(project);
-            boolean autoDetect = TranslateAction.isAutoDetect(project);
+            Pair<String, String> langPair = TranslateEditorAction.getLangPair(project);
+            boolean autoDetect = TranslateEditorAction.isAutoDetect(project);
 
             List<String>
                 translated =
@@ -76,6 +76,7 @@ class TranslateHandler extends EditorActionHandler {
         for (String word : splitted) {
             builder.append(word).append(WORD_CONJUNCTION);
         }
+
         return builder.toString();
     }
 }

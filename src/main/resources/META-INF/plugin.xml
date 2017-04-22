@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.lid.intellij.translateme</id>
-    <name>TranslateMe2</name>
-    <version>2.0.0</version>
+    <name>TranslateMeX</name>
+    <version>1.0.0</version>
 
     <vendor email="kraluk[at]gmail[dot]com" url="https://github.com/kraluk">kraluk's GitHub</vendor>
 
@@ -15,7 +15,7 @@
     ]]></description>
 
     <change-notes><![CDATA[
-            2.0.0 Refactored version of vlivanov's (github.com/vlivanov/translate-me) plugin<br/>
+            1.0.0 Refactored version of vlivanov's (github.com/vlivanov/translate-me) plugin<br/>
     ]]>
     </change-notes>
 
@@ -43,16 +43,16 @@
 
     <actions>
 
-        <action id="com.lid.intellij.translateme.action.TranslateAction"
-                class="com.lid.intellij.translateme.action.TranslateAction"
+        <action id="com.lid.intellij.translateme.action.TranslateEditorAction"
+                class="com.lid.intellij.translateme.action.TranslateEditorAction"
                 text="Translate action"
                 description="Click here to try translate a selected word with Yandex translator">
             <add-to-group group-id="EditMenu" anchor="last"/>
             <keyboard-shortcut keymap="$default" first-keystroke="alt Y"/>
         </action>
 
-        <action id="com.lid.intellij.translateme.action.TranslateAndReplaceAction"
-                class="com.lid.intellij.translateme.action.TranslateAndReplaceAction"
+        <action id="com.lid.intellij.translateme.action.TranslateAndReplaceEditorAction"
+                class="com.lid.intellij.translateme.action.TranslateAndReplaceEditorAction"
                 text="Translate and Replace action"
                 description="Click here to replace a selected word with Yandex translatation">
             <add-to-group group-id="EditMenu" anchor="last"/>

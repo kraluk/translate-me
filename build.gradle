@@ -14,7 +14,7 @@ repositories {
 sourceCompatibility = javaVersion
 targetCompatibility = javaTargetVersion
 
-group pluginGroup
+group = pluginGroup
 version = pluginVersion
 
 sourceSets {

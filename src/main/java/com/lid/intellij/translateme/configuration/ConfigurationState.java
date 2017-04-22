@@ -5,6 +5,7 @@ import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.util.xmlb.XmlSerializerUtil;
+import com.lid.intellij.translateme.common.ApplicationConstant;
 
 @State(
     name = ConfigurationComponent.COMPONENT_NAME,
@@ -12,8 +13,8 @@ import com.intellij.util.xmlb.XmlSerializerUtil;
 )
 public class ConfigurationState implements PersistentStateComponent<ConfigurationState> {
 
-    private String langFrom = "en";
-    private String langTo = "pl";
+    private String langFrom = ApplicationConstant.DEFAULT_SOURCE_LANGUAGE;
+    private String langTo = ApplicationConstant.DEFAULT_TARGET_LANGUAGE;
 
     private boolean autoDetect = false;
 

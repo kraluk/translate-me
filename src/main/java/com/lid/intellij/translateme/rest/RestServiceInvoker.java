@@ -15,10 +15,10 @@ import java.util.Scanner;
 public class RestServiceInvoker {
     private static final Logger log = Logger.getInstance(RestServiceInvoker.class);
 
-    public static final String DEFAULT_ENCODING = "UTF-8";
-
     private static final String DEFAULT_DELIMITER_PATTERN = "\\A";
     private static final String EMPTY_RESPONSE = "";
+
+    public static final String DEFAULT_ENCODING = "UTF-8";
 
     /**
      * Invokes given {@code GET} request and retrieves results
