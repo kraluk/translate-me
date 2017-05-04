@@ -19,7 +19,8 @@ before_install:
 
 script:
   - ./gradlew clean
-  - ./gradlew build --info --stacktrace
+  - ./gradlew assemble
+  - ./gradlew test integrationTest
   - ./gradlew jacocoTestReport
 
 after_success:
