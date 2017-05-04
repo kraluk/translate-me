@@ -20,8 +20,7 @@ before_install:
 script:
   - ./gradlew clean
   - ./gradlew assemble
-  - ./gradlew test integrationTest
-  - ./gradlew jacocoTestReport
+  - ./gradlew test integrationTest jacocoTestReport
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
