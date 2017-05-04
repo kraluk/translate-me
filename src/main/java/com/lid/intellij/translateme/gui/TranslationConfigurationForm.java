@@ -106,7 +106,7 @@ public class TranslationConfigurationForm {
             try {
                 availableLanguages = yandexService.getLanguages(DEFAULT_UI_LANGUAGE);
             } catch (Exception e) {
-                log.error(e);
+                log.warn(e);
 
                 availableLanguages = new AvailableLanguages(); // "null-object"
             }

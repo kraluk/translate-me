@@ -43,7 +43,7 @@ public class RestServiceInvoker {
 
             result = scanner.hasNext() ? scanner.next() : EMPTY_RESPONSE;
         } catch (Exception e) {
-            log.error("Unable to invoke request '{}'", e, request);
+            log.warn(String.format("Unable to invoke request '%s'", request), e);
             result = EMPTY_RESPONSE;
         }
 
